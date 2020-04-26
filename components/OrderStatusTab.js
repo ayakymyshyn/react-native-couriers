@@ -9,21 +9,21 @@ export default function OrderStatusTab({
   position,
 }) {
   return (
-    <View style={{ flexDirection: 'row' }}>
+    <View style={{ flexDirection: "row" }}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
             : options.title !== undefined
-              ? options.title
-              : route.name;
+            ? options.title
+            : route.name;
 
         const isFocused = state.index === index;
 
         const onPress = () => {
           const event = navigation.emit({
-            type: 'tabPress',
+            type: "tabPress",
             target: route.key,
             canPreventDefault: true,
           });
@@ -35,7 +35,7 @@ export default function OrderStatusTab({
 
         const onLongPress = () => {
           navigation.emit({
-            type: 'tabLongPress',
+            type: "tabLongPress",
             target: route.key,
           });
         };
@@ -43,13 +43,13 @@ export default function OrderStatusTab({
         const inputRange = state.routes.map((_, i) => i);
         const opacity = Animated.interpolate(position, {
           inputRange,
-          outputRange: inputRange.map(i => (i === index ? 1 : 1)),
+          outputRange: inputRange.map((i) => (i === index ? 1 : 1)),
         });
 
         return (
           <TouchableOpacity
             accessibilityRole="button"
-            accessibilityStates={isFocused ? ['selected'] : []}
+            accessibilityStates={isFocused ? ["selected"] : []}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarTestID}
             onPress={onPress}
@@ -59,16 +59,18 @@ export default function OrderStatusTab({
               borderRightColor: "#e6e6e6",
               borderRightWidth: 1,
               padding: 25,
-              paddingTop: 35
+              paddingTop: 35,
             }}
           >
-            <Animated.Text style={{
-              opacity,
-              fontSize: 20,
-              textAlign: "center",
-              fontFamily: "Roboto-Medium",
-              color: `${label === "Активные" ? "green" : "red"}`,
-            }}>
+            <Animated.Text
+              style={{
+                opacity,
+                fontSize: 20,
+                textAlign: "center",
+                fontFamily: "Roboto-Medium",
+                color: `${label === "Активные" ? "green" : "red"}`,
+              }}
+            >
               {label}
             </Animated.Text>
           </TouchableOpacity>
@@ -77,5 +79,3 @@ export default function OrderStatusTab({
     </View>
   );
 }
-
-
